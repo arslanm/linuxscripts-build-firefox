@@ -1,0 +1,10 @@
+#!/bin/bash
+
+rm /usr/bin/firefox > /dev/null 2>&1
+ln -s /opt/firefox/firefox /usr/bin/firefox
+
+chmod 644 /usr/share/applications/firefox.desktop
+chown root:root /usr/share/applications/firefox.desktop
+update-desktop-database -q
+
+echo "Please restart any running instances of Firefox."
