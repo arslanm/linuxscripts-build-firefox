@@ -1,7 +1,6 @@
 Package: firefox
 Name: Mozilla Firefox
 Maintainer: Mozilla Foundation
-Architecture: amd64
 Priority: standard
 Section: web
 Homepage: http://www.firefox.com/
