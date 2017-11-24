@@ -9,7 +9,7 @@ such as Ubuntu, Linux Mint, etc.
 Clone this repository or download and extract the .ZIP file from GitHub.
 
 Run **./build-firefox.sh**
-Select the release channel that you want to build a package for (stable or beta).
+Select the architecture and release channel that you want to build a package for (stable or beta).
 
 Execute the script with the **--install** flag (e.g. **./build-firefox --install**) to install the package
 after it has been built.
@@ -18,6 +18,3 @@ after it has been built.
 To install Firefox after it has been built, execute **sudo dpkg -i firefox-*.deb**.
 
 Alternatively, use GDebi or another package manager of your choice.
-
-## Notes
-This script currently only supports building packages for 64-bit Linux (amd64).

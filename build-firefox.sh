@@ -1,34 +1,45 @@
 #!/bin/bash
-        CPUARCH=`uname -m`
 
-    if [ "$CPUARCH" = "x86_64" ]; then
-        FXARCH=linux64
-        DEBARCH=amd64
-    else
-        FXARCH=linux
-        DEBARCH=i386
-    fi
-
-    # Prompt for Release type
+    # Prompt for architecture and release channel
         clear
         echo "Mozilla Firefox packager for Debian-based Linux distributions"
         echo ""
+        echo "Which architecture would you like to target?"
+        echo ""
+        echo "[1] i386  (32-bit)"
+        echo "[2] amd64 (64-bit)"
+        echo ""
+        echo "Please enter a number below:"
+        echo ""
+        read PKGARCH
+        echo ""
         echo "Which release channel would you like to download?"
         echo ""
-        echo "[1] Stable"
-        echo "[2] Beta"
+        echo "[1] Stable channel release"
+        echo "[2] Beta channel release"
         echo ""
         echo "Please enter a number below:"
         read FXREL
 
+    # Set variables for user options
+        # Architecture
+            if [ $PKGARCH = 1 ]; then
+                FXARCH=linux
+                DEBARCH=i386
+            elif [ $PKGARCH = 2 ]; then
+                FXARCH=linux64
+                DEBARCH=amd64
+            fi
+
+        # Release channel
+            if [ $FXREL = 1 ]; then
+                FXCHANNEL=firefox-latest-ssl
+            elif [ $FXREL = 2 ]; then
+                FXCHANNEL=firefox-beta-latest-ssl
+            fi
+
     # Check for the latest version of Firefox
-        if [ $FXREL = 1 ]
-        then
-            VERSION=${VERSION:-$(wget --spider -S --max-redirect 0 "https://download.mozilla.org/?product=firefox-latest-ssl&os=${FXARCH}&lang=en-US" 2>&1 | sed -n '/Location: /{s|.*/firefox-\(.*\)\.tar.*|\1|p;q;}')}
-        else
-        
-            VERSION=${VERSION:-$(wget --spider -S --max-redirect 0 "https://download.mozilla.org/?product=firefox-beta-latest-ssl&os=${FXARCH}&lang=en-US" 2>&1 | sed -n '/Location: /{s|.*/firefox-\(.*\)\.tar.*|\1|p;q;}')}
-        fi
+        VERSION=${VERSION:-$(wget --spider -S --max-redirect 0 "https://download.mozilla.org/?product=${FXCHANNEL}&os=${FXARCH}&lang=en-US" 2>&1 | sed -n '/Location: /{s|.*/firefox-\(.*\)\.tar.*|\1|p;q;}')}
 
     # Set download URL
         FIREFOXPKG="https://download.mozilla.org/?product=firefox-${VERSION}&os=${FXARCH}&lang=en-US"
