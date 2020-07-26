@@ -18,3 +18,5 @@ after it has been built.
 To install Firefox after it has been built, execute **sudo dpkg -i firefox-*.deb**.
 
 Alternatively, use GDebi or another package manager of your choice.
+
+muratin degisikligi
