@@ -1,5 +1,6 @@
 #!/bin/bash
 
+# ozgurun degisikligi budur
     # Prompt for architecture and release channel
         clear
         echo "Mozilla Firefox packager for Debian-based Linux distributions"
